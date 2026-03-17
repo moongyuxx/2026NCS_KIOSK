@@ -1,13 +1,12 @@
 import numpy as np
 
-items = [48, 7, 99, -3]
-items = list(map(lambda i: i+5, items))
-print(items)
+scores = np.array([
+    # 국, 영, 수
+    [80, 100, 90], #A 학생
+    [85, 70, 95], #B 학생
+    [89, 85, 87] #C학생
+])
 
-items = [i+5 for i in items]
-print(items)
-
-a = np.array([1, 2, 3, 4, 5])
-
-print(a + 5)
-print(a.item(0))
+print(f"전체 평균: {np.mean(scores)}")
+print(f"국영수 과목별 평균: {np.mean(scores, axis=0)}") # 열 기준 연산
+print(f"ABC 학생별 최고 점수: {np.max(scores, axis=1)}") # 행 기준 연산
