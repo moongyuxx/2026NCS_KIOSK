@@ -1,19 +1,15 @@
-import numpy as np
-import pandas as pd
+import ssl
+import seaborn as sns
 
-#      a   b    c
-# 1  100  95   70
-# 2   80  75  100
-# 3   90  85   99
+# SSL 인증 비활성화
+ssl._create_default_https_context = ssl._create_unverified_context
 
-items = [
-    [100,80,90],
-    [95,75,85],
-    [70,100,99]
-]
+mpg = sns.load_dataset('mpg')
 
-df_items = pd.DataFrame(items, index=[1,2,3], columns=["a","b","c"])
-print(df_items)
+print(
+    mpg[['origin', 'name', 'mpg']]
+    .query('origin == "europe" and mpg >= 30.0')
+    .sort_values('mpg', ascending=False)
+)
 
-df_items_melt = pd.melt(df_items).rename(columns={"variable":"var", "value":"val"}).query("val >= 85")
-print(df_items_melt)
+print(mpg)
