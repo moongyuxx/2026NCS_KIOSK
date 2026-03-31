@@ -7,7 +7,7 @@ def time_measure_decorator(f):
         s = time.time()
         r = f(*args)
         e = time.time()
-        print(e-s)
+        print(f"time : {e-s}")
         return r
     return wrapper
 
@@ -19,12 +19,12 @@ def one_to_n_loop(n): #반복문으로 직접 더함
     return result
 
 
-@time_measure_decorator
-def ont_to_n_math(n): #수학 공식 사용
+def one_to_n_math(n): #수학 공식 사용
     r = n * (n + 1) // 2
     return r
 
 
 number = int(input("Input number : "))
-print(ont_to_n_math(number))
+func = time_measure_decorator(one_to_n_math)
+print(func(number))
 print(one_to_n_loop(number))
